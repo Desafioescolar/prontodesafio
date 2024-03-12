@@ -216,6 +216,13 @@ footer p {
             <h1 class="display-4">Bem-vindo ao Desafio de Conteúdos Escolares</h1>
             <p class="lead">O Desafio é online! Os participantes que passarem para a fase final terão a chance de ganhar prêmios incríveis!</p>
         </div>
+         <!-- Chat para Suporte -->
+     <div class="chat-container" id="chatContainer">
+        <div class="chat-header" id="chatHeader">Suporte Online <i class="fas fa-chevron-down"></i></div>
+        <div class="chat-body" id="chatBody"></div>
+        <textarea class="chat-input" id="chatInput" placeholder="Digite sua mensagem..."></textarea>
+        <button class="chat-send-button" id="chatSendButton">Enviar</button>
+    </div>
     </header>
     <header id="vip">
         <div class="logo">
@@ -358,6 +365,7 @@ footer p {
             &copy; 2024 Micten. Todos os direitos reservados.
         </div>
     </footer>
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -365,6 +373,9 @@ footer p {
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <!-- Firebase Firestore -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
     <script>
      $(document).ready(function() {
         const firebaseConfig = {
@@ -452,5 +463,115 @@ footer p {
 });
 
     </script>
+    <script>
+    $(document).ready(function() {
+    // Inicializa o Realtime Database
+    var database = firebase.database();
+
+    // Verifica se é a primeira vez que o usuário está enviando uma mensagem
+    var userName = localStorage.getItem('userName');
+    if (!userName) {
+        // Se for a primeira vez, solicita o nome do usuário
+        userName = prompt('Por favor, digite seu nome:');
+        // Salva o nome do usuário localmente no navegador
+        localStorage.setItem('userName', userName);
+    }
+
+    // Mostra ou esconde o chat quando o cabeçalho é clicado
+    $('#chatHeader').click(function() {
+        $('#chatContainer').toggle();
+    });
+
+    // Envia mensagem quando o botão de enviar é clicado
+    $('#chatSendButton').click(function() {
+        sendMessage();
+    });
+
+    // Envia mensagem quando a tecla Enter é pressionada no campo de entrada de texto
+    $('#chatInput').keypress(function(event) {
+        if (event.which == 13) {
+            sendMessage();
+        }
+    });
+
+    // Função para enviar mensagem
+    function sendMessage() {
+        var message = $('#chatInput').val();
+        if (message.trim() !== '') {
+            // Adiciona a mensagem ao Realtime Database
+            var newMessageRef = database.ref('chatMessages').push();
+            newMessageRef.set({
+                sender: userName,
+                message: message,
+                likes: 0, // Inicializa o número de likes como 0
+                dislikes: 0 // Inicializa o número de dislikes como 0
+            })
+            .then(function() {
+                console.log('Mensagem enviada com sucesso!');
+                $('#chatInput').val('');
+            })
+            .catch(function(error) {
+                console.error('Erro ao enviar mensagem: ', error);
+            });
+        }
+    }
+
+    // Função para adicionar um like a uma mensagem
+    function likeMessage(messageId) {
+        database.ref('chatMessages/' + messageId + '/likes').transaction(function(likes) {
+            return (likes || 0) + 1;
+        });
+    }
+
+    // Função para adicionar um dislike a uma mensagem
+    function dislikeMessage(messageId) {
+        database.ref('chatMessages/' + messageId + '/dislikes').transaction(function(dislikes) {
+            return (dislikes || 0) + 1;
+        });
+    }
+
+    // Evento de clique para botões de like
+    $(document).on('click', '.like-button', function() {
+        var messageId = $(this).data('message-id');
+        likeMessage(messageId);
+    });
+
+    // Evento de clique para botões de dislike
+    $(document).on('click', '.dislike-button', function() {
+        var messageId = $(this).data('message-id');
+        dislikeMessage(messageId);
+    });
+
+    // Monitora mudanças no Realtime Database para atualizar os números de likes e dislikes
+    database.ref('chatMessages').on('child_changed', function(snapshot) {
+        var messageId = snapshot.key;
+        var likes = snapshot.val().likes || 0;
+        var dislikes = snapshot.val().dislikes || 0;
+        $('#likesCount_' + messageId).text(likes);
+        $('#dislikesCount_' + messageId).text(dislikes);
+    });
+
+    // Carrega as mensagens existentes do Realtime Database
+    database.ref('chatMessages').on('child_added', function(snapshot) {
+        var data = snapshot.val();
+        var messageId = snapshot.key;
+        var senderClass = (data.sender === userName) ? 'own-message' : '';
+        var messageHtml = '<div class="message ' + senderClass + '">';
+        messageHtml += '<strong>' + data.sender + ':</strong> ' + data.message + '<br>';
+        messageHtml += '<div>';
+        messageHtml += '<button class="like-button" data-message-id="' + messageId + '">👍</button>';
+        messageHtml += '<span class="likes-count" id="likesCount_' + messageId + '">' + data.likes + '</span>';
+        messageHtml += '<button class="dislike-button" data-message-id="' + messageId + '">👎</button>';
+        messageHtml += '<span class="dislikes-count" id="dislikesCount_' + messageId + '">' + data.dislikes + '</span>';
+        messageHtml += '</div>';
+        messageHtml += '</div>';
+        $('#chatBody').append(messageHtml);
+    });
+});
+
+
+
+    </script>
+
 </body>
 </html>
