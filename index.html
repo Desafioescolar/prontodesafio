@@ -9,49 +9,55 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.0.18/sweetalert2.min.css">
     <style>
         body {
-            
-            font-family: "Times New Roman", Times, serif;
-            background-color: #e1e1e1;
-            background-blend-mode: color-burn;
-            color: #0d0202;
+            font-family: 'Times New Roman', Times, serif;
+            background-color: #f8f9fa;
+            color: #343a40;
             margin-top: 20px;
         }
 
         header {
             background-color: #ff9100;
-            background-image: url("./img/vip.jpg");
-            background-blend-mode: hard-light;
+            background-image:url("./img/vip.jpg");
             color: #fff;
-            font: normal 100px Times New Roman;
             padding: 20px 0;
-            margin-bottom: 20px;
             border-radius: 0 0 10px 10px;
         }
 
-        footer {
-            background-color: #343a40;
-            color: #fff;
-            padding: 20px 0;
-            border-radius: 10px 10px 0 0;
+        .logo img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 5px solid rgb(106, 80, 255);
         }
 
-        .prize {
-            text-align: center;
-            margin-bottom: 20px;
+        .lead {
+            border: 2px solid #3498db;
+            padding: 10px;
+            border-radius: 20px;
+            color: #ffffff;
+        }
+
+        .description-card {
+            background-color: #fff;
             border-radius: 10px;
             padding: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            background-color: #fff;
+            margin-top: 20px;
         }
 
-        .prize img {
-            max-width: 100%;
-            border-radius: 8px;
-            margin-bottom: 10px;
+        .description-card table {
+            width: 100%;
+            border-collapse: collapse;
         }
 
-        .explanation {
-            margin-bottom: 20px;
+        .description-card th, .description-card td {
+            border: 1px solid #dee2e6;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .description-card th {
+            background-color: #f8f9fa;
         }
 
         .instruction-card {
@@ -59,7 +65,7 @@
             border-radius: 10px;
             padding: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
+            margin-top: 20px;
         }
 
         .instruction-card h3 {
@@ -67,15 +73,22 @@
             margin-bottom: 10px;
         }
 
+        .inscribe-form {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
         .countdown-card {
             background-color: #007bff;
             color: #fff;
             border-radius: 10px;
-            margin-top: 20px;
             padding: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             text-align: center;
-            margin-bottom: 20px;
+            margin-top: 20px;
         }
 
         .countdown-card h3 {
@@ -84,377 +97,360 @@
             margin-bottom: 20px;
         }
 
-        .container {
-        width: 900px;
-        }
-
-        .explanation ol strong {
-            background-color: #007bff;
+        footer {
+            background-color: #343a40;
             color: #fff;
-            padding: 2px 5px;
-            border-radius: 3px;
+            padding: 20px 0;
+            border-radius: 10px 10px 0 0;
+            margin-top: 20px;
         }
 
-        .carousel-item {
-            border: 3px solid #007bff;
-            border-radius: 10px;
-            overflow: hidden;
-        }
+        footer p {
+            margin-bottom: 0;
+        }/* Estilos para o cabeçalho principal */
+header.container.text-center {
+    background-color: #ff9100;
+    padding: 20px 0;
+    border-radius: 0 0 10px 10px;
+}
 
-        @keyframes blink {
-            0% { opacity: 1; }
-            50% { opacity: 0.5; }
-            100% { opacity: 1; }
-        }
+header.container.text-center .logo img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 5px solid coral;
+}
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
+header.container.text-center h1.display-4 {
+    color: #fff;
+    margin-bottom: 20px;
+}
 
-        .blink {
-            animation: blink 1s linear infinite;
-        }
+header.container.text-center p.lead {
+    color: #ffffff;
+    border: 2px solid #3498db;
+    padding: 10px;
+    border-radius: 20px;
+}
 
-        .pulse {
-            animation: pulse 5s infinite;
-        }
+/* Estilos para o cabeçalho secundário */
+header#vip {
+    background-color: #f8f9fa;
+    padding: 20px 0;
+}
 
-        .lead {
-            border: 2px solid #3498db;
-            padding: 10px;
-            border-radius: 20px;
-            color: #ffffff;
-            background-image: url("./img/vip.jpg")
-        }
+header#vip .logo .vip2 {
+    display: flex;
+    align-items: center;
+}
 
-        #vip {
-            background-color: #333;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 20px;
-        }
+header#vip .logo .vip2 h3 {
+    margin-right: 10px;
+    color: #343a40;
+}
 
-        .vip2 {
-            width: 150px;
-            height: auto;
-        }
+/* Estilos para os prêmios */
+.row .col-md-4 .prize {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin-top: 20px;
+}
 
-        .logo img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            border: 5px solid coral;
-        }
+.row .col-md-4 .prize img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
 
-        #vip3 {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            border: 5px solid coral;
-        }
+.row .col-md-4 .prize p.h4 {
+    color: #343a40;
+    font-weight: bold;
+}
+
+/* Estilos para os ícones dos prêmios */
+.row .col-md-4 .prize i {
+    margin-left: 5px;
+}
+
+/* Estilos adicionais */
+footer {
+    background-color: #343a40;
+    color: #fff;
+    padding: 20px 0;
+    border-radius: 0 0 10px 10px;
+    margin-top: 20px;
+}
+
+footer p {
+    margin-bottom: 0;
+}
+#vip {
+    text-align: center;
+}
+
+.logo {
+    display: inline-block;
+    background:#f9fbf9;
+    border: 5px solid #ff9100;
+    color: white;
+    animation: pulse 1s infinite;
+    
+    
+    
+}
+
+
     </style>
 </head>
 <body>
+
     <header>
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-2 text-center">
-                    <img id="vip3" src="./img/vip2.webp" alt="Logo da Micten" class="img-fluid">
-                </div>
-                <div class="col-md-10">
-                    <h1 class="display-4">Bem-vindo ao Desafio de Conteúdos Escolares</h1>
-                    <p id="piscante" class="lead blink pulse">O Desafio é online! Os participantes que passarem para a fase final terão a chance de ganhar prêmios incríveis!</p>
-                </div>
+        <div class="container text-center">
+            <div class="logo">
+                <img src="./img/vip2.webp" alt="Logo da Micten">
             </div>
+            <h1 class="display-4">Bem-vindo ao Desafio de Conteúdos Escolares</h1>
+            <p class="lead">O Desafio é online! Os participantes que passarem para a fase final terão a chance de ganhar prêmios incríveis!</p>
         </div>
     </header>
-
     <header id="vip">
         <div class="logo">
             <div class="vip2">
-                <h3>Inscrição é 150 Mt 
-                Deposite na emola: 865400070</h3>
+                <h3 id="ins">Inscrição é 150 Mt Deposite na emola: 868033978</h3>
                 <img src="./img/emola.png" alt="Imagem Esquerda">
             </div>
         </div>
     </header>
-
-    <!-- Seção de Modalidades -->
-    <section id="desafio-descricao" class="py-5">
-        <div class="container">
-            <h2 class="text-center mb-5">Descrição do Desafio Escolar</h2>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>Detalhes</th>
-                                            <th>Descrição</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td><strong>Local</strong></td>
-                                            <td>Online</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>Data</strong></td>
-                                            <td>1 a 10 de maio de 2024</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>Horário</strong></td>
-                                            <td>8:00 - 18:00</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>Duração</strong></td>
-                                            <td>2 horas por disciplina</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>Formato</strong></td>
-                                            <td>Questões de múltipla escolha e dissertativas</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>Conteúdo</strong></td>
-                                            <td>Matemática, Física, Química, Biologia</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>Classificação</strong></td>
-                                            <td>Top 10% de cada modalidade avançam para a fase final</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>Premiação</strong></td>
-                                            <td>Prêmios para os três primeiros colocados de cada modalidade</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <p>A participação no Desafio de Conteúdos Escolares é uma oportunidade para os alunos testarem seus conhecimentos e habilidades em diferentes disciplinas. O evento será realizado online, permitindo que os alunos participem de qualquer lugar com acesso à internet.</p>
-                            <p>Cada disciplina terá uma duração de 2 horas e consistirá em questões de múltipla escolha e dissertativas. Os alunos serão avaliados em matemática, física, química e biologia, com os 10% melhores de cada modalidade avançando para a fase final.</p>
-                            <p>Na fase final, os melhores desempenhos de cada disciplina competirão entre si. Os três primeiros colocados de cada modalidade serão premiados com prêmios emocionantes, reconhecendo seu esforço e conquistas.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
     
-                <!-- Adicione as outras disciplinas (modalidades) aqui -->
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="prize">
+                <img src="./img/pc1.webp" alt="Notebook" class="img-fluid">
+                <p class="h4">1º Lugar: 2 Notebooks <i class="fas fa-laptop"></i></p>
             </div>
         </div>
-    </section>
+        <div class="col-md-4">
+            <div class="prize">
+                <img src="./img/telev.jpg" alt="Televisão" class="img-fluid">
+                <p class="h4">2º Lugar: Televisão de 32 polegadas <i class="fas fa-tv"></i></p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="prize">
+                <img src="./img/fo.webp" alt="Telefone Android" class="img-fluid">
+                <p class="h4">3º Lugar: 1 Telefone Android <i class="fas fa-mobile-alt"></i></p>
+            </div>
+        </div>
+    </div>
+
 
     <div class="container">
-        <div class="row">
-            <div class="col-sm-4 mb-4">
-                <div id="carousel1" class="carousel slide" data-ride="carousel" data-interval="5000">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="./img/alu2.jpg" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="./img/alu2.jpg" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="./img/alu2.jpg" class="d-block w-100" alt="...">
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="description-card">
+            <h2 class="text-primary">Descrição do Desafio de Conteúdos Escolares</h2>
+            <table>
+                <tr>
+                    <th>Modalidade</th>
+                    <th>Descrição</th>
+                </tr>
+                <tr>
+                    <td>Matemática</td>
+                    <td>Desafios envolvendo problemas matemáticos de diferentes níveis de dificuldade.</td>
+                </tr>
+                <tr>
+                    <td>Física</td>
+                    <td>Desafios que testam o conhecimento em conceitos físicos e resolução de problemas.</td>
+                </tr>
+                <tr>
+                    <td>Química</td>
+                    <td>Desafios relacionados aos princípios fundamentais da química e experimentação.</td>
+                </tr>
+                <tr>
+                    <td>Biologia</td>
+                    <td>Desafios abordando conceitos biológicos, ecossistemas e ciências da vida.</td>
+                </tr>
+            </table>
+        </div>
 
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="prize">
-                            <img src="./img/pc1.webp" alt="Notebook" class="img-fluid">
-                            <p class="h4">1º Lugar: 2 Notebooks <i class="fas fa-laptop"></i></p>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="prize">
-                            <img src="./img/telev.jpg" alt="Televisão" class="img-fluid">
-                            <p class="h4">2º Lugar: Televisão de 32 polegadas <i class="fas fa-tv"></i></p>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="prize">
-                            <img src="./img/fo.webp" alt="Telefone Android" class="img-fluid">
-                            <p class="h4">3º Lugar: 1 Telefone Android <i class="fas fa-mobile-alt"></i></p>
-                        </div>
-                    </div>
+        <div class="instruction-card">
+            <h2 class="text-primary">Como Funciona o Desafio de Conteúdos Escolares?</h2>
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Inscrição</h3>
+                    <p>Os alunos interessados devem preencher o formulário de inscrição com suas informações pessoais.</p>
                 </div>
-                <div class="explanation mt-5">
-                    <h2 class="text-primary">Como Funciona o Desafio de Conteúdos Escolares?</h2>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="instruction-card">
-                                <h3>Inscrição</h3>
-                                <p>Os alunos interessados devem preencher o formulário de inscrição com suas informações pessoais.</p>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="instruction-card">
-                                <h3>Seleção de Participantes</h3>
-                                <p>Avaliadores revisarão e selecionarão os participantes elegíveis neste caso os que se Inscrevaram-se.</p>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="instruction-card">
-                                <h3>Desafios Online</h3>
-                                <p>Os participantes selecionados serão convidados a participar de desafios online em várias disciplinas.</p>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="instruction-card">
-                                <h3>Fase Final</h3>
-                                <p>Os melhores desempenhos competirão na fase final.</p>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="instruction-card">
-                                <h3>Premiação</h3>
-                                <p>Prêmios serão concedidos aos três primeiros colocados.</p>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="instruction-card">
-                                <h3>Reconhecimento</h3>
-                                <p>Participantes receberão reconhecimento por seu desempenho excepcional.</p>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="instruction-card">
-                                <h3>Aprendizado e Diversão</h3>
-                                <p>O desafio promove aprendizado e diversão.</p>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="instruction-card">
-                                <h3>Inspiração Futura</h3>
-                                <p>Espera-se que o desafio inspire os alunos a continuar buscando o conhecimento.</p>
-                            </div>
-                        </div>
-                    </div>
+                <div class="col-md-12">
+                    <h3>Seleção de Participantes</h3>
+                    <p>Avaliadores revisarão e selecionarão os participantes elegíveis.</p>
                 </div>
-                <div class="inscribe-form">
-                    <h2>Inscreva-se Agora</h2>
-                    <form id="inscriptionForm">
-                        <div class="form-group">
-                            <label for="fullName">Nome Completo</label>
-                            <input type="text" id="fullName" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="phoneNumber">Número de Telefone:</label>
-                            <input type="tel" id="phoneNumber" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="class">Classe:</label>
-                            <select id="class" class="form-control" required>
-                                <option value="" disabled selected>Selecione sua Classe</option>
-                                <option value="10">10ª Classe</option>
-                                <option value="11">11ª Classe</option>
-                                <option value="12">12ª Classe</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="school">Escola:</label>
-                            <input type="text" id="school" class="form-control" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-lg btn-block">Inscrever-se <i class="fas fa-check"></i></button>
-                    </form>
+                <div class="col-md-12">
+                    <h3>Desafios Online</h3>
+                    <p>Os participantes selecionados serão convidados a participar de desafios online em várias disciplinas.</p>
                 </div>
-                <div class="countdown-card">
-                    <h3>Tempo Restante para o Início da Inscrição</h3>
-                    <div class="countdown-timer">
-                        <span class="days"></span>
-                        <span class="hours"></span>
-                        <span class="minutes"></span>
-                        <span class="seconds"></span>
-                    </div>
+                <div class="col-md-12">
+                    <h3>Fase Final</h3>
+                    <p>Os melhores desempenhos competirão na fase final.</p>
+                </div>
+                <div class="col-md-12">
+                    <h3>Premiação</h3>
+                    <p>Prêmios serão concedidos aos três primeiros colocados.</p>
+                </div>
+                <div class="col-md-12">
+                    <h3>Reconhecimento</h3>
+                    <p>Participantes receberão reconhecimento por seu desempenho excepcional.</p>
+                </div>
+                <div class="col-md-12">
+                    <h3>Aprendizado e Diversão</h3>
+                    <p>O desafio promove aprendizado e diversão.</p>
+                </div>
+                <div class="col-md-12">
+                    <h3>Inspiração Futura</h3>
+                    <p>Espera-se que o desafio inspire os alunos a continuar buscando o conhecimento.</p>
                 </div>
             </div>
         </div>
-        <footer>
-            <div class="container text-center">
-                &copy; 2024 Micten. Todos os direitos reservados.
+
+        <div class="inscribe-form">
+            <h2>Inscreva-se Agora</h2>
+            <form id="inscriptionForm">
+                <div class="form-group">
+                    <label for="fullName">Nome Completo</label>
+                    <input type="text" id="fullName" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="phoneNumber">Número de Telefone:</label>
+                    <input type="tel" id="phoneNumber" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="class">Classe:</label>
+                    <select id="class" class="form-control" required>
+                        <option value="" disabled selected>Selecione sua Classe</option>
+                        <option value="10">10ª Classe</option>
+                        <option value="11">11ª Classe</option>
+                        <option value="12">12ª Classe</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="school">Escola:</label>
+                    <input type="text" id="school" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg btn-block">Inscrever-se <i class="fas fa-check"></i></button>
+            </form>
+        </div>
+
+        <div class="countdown-card">
+            <h3>Tempo Restante para o Início da Inscrição</h3>
+            <div class="countdown-timer">
+                <span class="days"></span>
+                <span class="hours"></span>
+                <span class="minutes"></span>
+                <span class="seconds"></span>
             </div>
-        </footer>
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.0.18/sweetalert2.all.min.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
-        <script>
-            const firebaseConfig = {
-                apiKey: "YOUR_API_KEY",
-                authDomain: "YOUR_AUTH_DOMAIN",
-                databaseURL: "YOUR_DATABASE_URL",
-                projectId: "YOUR_PROJECT_ID",
-                storageBucket: "YOUR_STORAGE_BUCKET",
-                messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-                appId: "YOUR_APP_ID",
-                measurementId: "YOUR_MEASUREMENT_ID"
-            };
+        </div>
+    </div>
 
-            firebase.initializeApp(firebaseConfig);
-            var database = firebase.database();
+    <footer>
+        <div class="container text-center">
+            &copy; 2024 Micten. Todos os direitos reservados.
+        </div>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script>
+     $(document).ready(function() {
+        const firebaseConfig = {
+  apiKey: "AIzaSyD8XOHaLCzNLDrIlHG3em4g4gyYIKTLWpQ",
+  authDomain: "xitique-61310.firebaseapp.com",
+  databaseURL: "https://xitique-61310-default-rtdb.firebaseio.com",
+  projectId: "xitique-61310",
+  storageBucket: "xitique-61310.appspot.com",
+  messagingSenderId: "331274991404",
+  appId: "1:331274991404:web:2fec0eb082d3fe0b33de89",
+  measurementId: "G-DFDMBKW1RK"
+};
 
-            $('#inscriptionForm').submit(function(e) {
-                e.preventDefault();
-                var fullName = $('#fullName').val();
-                var phoneNumber = $('#phoneNumber').val();
-                var selectedClass = $('#class').val();
-                var school = $('#school').val();
 
-                database.ref('inscritos').push({
-                    fullName: fullName,
-                    phoneNumber: phoneNumber,
-                    selectedClass: selectedClass,
-                    school: school
-                });
+    // Inicializa o Firebase com a configuração fornecida
+    firebase.initializeApp(firebaseConfig);
 
-                $('#fullName').val('');
-                $('#phoneNumber').val('');
-                $('#class').val('10');
-                $('#school').val('');
+    // Obtém uma referência para o banco de dados do Firebase
+    var database = firebase.database();
 
-                swal.fire("Inscrição Efetuada!", "Para concluir faz o deposito de inscrição . Prepare-se!", "success");
+    // Função executada quando o formulário de inscrição é enviado
+    $('#inscriptionForm').submit(function(e) {
+        e.preventDefault(); // Impede o envio padrão do formulário
+
+        // Obtém os valores dos campos do formulário
+        var fullName = $('#fullName').val();
+        var phoneNumber = $('#phoneNumber').val();
+        var selectedClass = $('#class').val();
+        var school = $('#school').val();
+
+        // Armazena os dados da inscrição no banco de dados do Firebase
+        database.ref('inscritos').push({
+            fullName: fullName,
+            phoneNumber: phoneNumber,
+            selectedClass: selectedClass,
+            school: school
+        });
+
+        // Limpa os campos do formulário após a inscrição
+        $('#fullName').val('');
+        $('#phoneNumber').val('');
+        $('#class').val('10');
+        $('#school').val('');
+
+        // Exibe um modal de sucesso após a inscrição
+        Swal.fire({
+            icon: 'success',
+            title: 'Inscrição bem-sucedida!',
+            text: 'Obrigado por se inscrever no Desafio de Conteúdo Escolar.',
+            confirmButtonText: 'OK'
+        });
+    });
+
+    // Define a data de término da contagem regressiva
+    var countDownDate = new Date("Mar 15, 2024 23:59:59").getTime();
+
+    // Inicia a contagem regressiva
+    var x = setInterval(function() {
+        var now = new Date().getTime();
+        var distance = countDownDate - now;
+
+        // Verifica se o período de registro ainda está aberto
+        if (distance > 0) {
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Atualiza os elementos HTML com o tempo restante
+            $(".countdown-timer .days").text(days + "d");
+            $(".countdown-timer .hours").text(hours + "h");
+            $(".countdown-timer .minutes").text(minutes + "m");
+            $(".countdown-timer .seconds").text(seconds + "s");
+        } else {
+            // Encerra a contagem regressiva e exibe um modal informando que as inscrições estão encerradas
+            clearInterval(x);
+            Swal.fire({
+                icon: 'error',
+                title: 'Inscrições encerradas!',
+                text: 'O período de inscrição para o Desafio de Conteúdo Escolar terminou.',
+                confirmButtonText: 'OK'
             });
+        }
+    }, 1000);
+});
 
-            var countDownDate = new Date("May 1, 2024 00:00:00").getTime();
-
-            var x = setInterval(function() {
-                var now = new Date().getTime();
-                var distance = countDownDate - now;
-
-                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                document.querySelector(".countdown-timer .days").innerHTML = days + "d";
-                document.querySelector(".countdown-timer .hours").innerHTML = hours + "h";
-                document.querySelector(".countdown-timer .minutes").innerHTML = minutes + "m";
-                document.querySelector(".countdown-timer .seconds").innerHTML = seconds + "s";
-
-                if (distance < 0) {
-                    clearInterval(x);
-                    document.getElementById("countdown").innerHTML = "<h3 class='text-center mb-3'>As inscrições estão encerradas!</h3>";
-                }
-            }, 1000);
-        </script>
+    </script>
 </body>
 </html>
