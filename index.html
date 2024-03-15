@@ -204,6 +204,7 @@ footer p {
 }
 
 
+
     </style>
 </head>
 <body>
@@ -216,13 +217,6 @@ footer p {
             <h1 class="display-4">Bem-vindo ao Desafio de Conteúdos Escolares</h1>
             <p class="lead">O Desafio é online! Os participantes que passarem para a fase final terão a chance de ganhar prêmios incríveis!</p>
         </div>
-         <!-- Chat para Suporte -->
-     <div class="chat-container" id="chatContainer">
-        <div class="chat-header" id="chatHeader">Suporte Online <i class="fas fa-chevron-down"></i></div>
-        <div class="chat-body" id="chatBody"></div>
-        <textarea class="chat-input" id="chatInput" placeholder="Digite sua mensagem..."></textarea>
-        <button class="chat-send-button" id="chatSendButton">Enviar</button>
-    </div>
     </header>
     <header id="vip">
         <div class="logo">
@@ -348,6 +342,135 @@ footer p {
                 <button type="submit" class="btn btn-primary btn-lg btn-block">Inscrever-se <i class="fas fa-check"></i></button>
             </form>
         </div>
+        <button id="toggleChatButton">Converse Conosco <i class="fas fa-chevron-down"></i></button>
+
+        <div class="chat-container" id="chatContainer">
+            <div class="chat-header" id="chatHeader">Ajuda online<i class="fas fa-chevron-up"></i></div>
+            <div class="chat-body" id="chatBody"></div>
+            <textarea class="chat-input" id="chatInput" placeholder="Digite sua mensagem..."></textarea>
+            <button class="chat-send-button" id="chatSendButton">Enviar</button>
+        </div>
+        
+        <script>
+            document.getElementById('toggleChatButton').addEventListener('click', function() {
+                var chatContainer = document.getElementById('chatContainer');
+                chatContainer.classList.toggle('show-chat');
+                var toggleIcon = document.querySelector('#toggleChatButton i');
+                toggleIcon.classList.toggle('fa-chevron-down');
+                toggleIcon.classList.toggle('fa-chevron-up');
+            });
+        
+            // Your existing JavaScript code for sending and displaying chat messages goes here
+        </script>
+        
+        <style>
+            /* Estilo para o botão de alternância do chat */
+            #toggleChatButton {
+                background-color: #4CAF50;
+                color: #fff;
+                border: none;
+                border-radius: 5px;
+                padding: 10px;
+                cursor: pointer;
+                font-size: 16px;
+                margin-bottom: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 200px;
+                transition: background-color 0.3s;
+            }
+        
+            /* Efeito de hover para o botão de alternância do chat */
+            #toggleChatButton:hover {
+                background-color: #45a049;
+            }
+        
+            /* Estilo para o ícone de alternância */
+            #toggleChatButton i {
+                transition: transform 0.3s;
+            }
+        
+            /* Estilo para o contêiner do chat */
+            .chat-container {
+                display: none;
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                width: 300px;
+                border-radius: 10px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                background-color: #f5f5f5;
+                z-index: 1000;
+                transition: transform 0.3s;
+            }
+        
+            /* Estilo para mostrar o chat */
+            .show-chat {
+                display: block;
+            }
+        
+            /* Estilo para o cabeçalho do chat */
+            .chat-header {
+                background-color: #4CAF50;
+                color: #fff;
+                padding: 10px;
+                font-size: 16px;
+                text-align: center;
+                cursor: pointer;
+                border-radius: 10px 10px 0 0;
+            }
+        
+            /* Estilo para a área de mensagens */
+            .chat-body {
+                max-height: 200px;
+                overflow-y: auto;
+                padding: 10px;
+            }
+        
+            /* Estilo para cada mensagem */
+            .message {
+                background-color: #fff;
+                border-radius: 10px;
+                padding: 10px;
+                margin-bottom: 10px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            }
+        
+            /* Estilo para a mensagem do próprio usuário */
+            .own-message {
+                background-color: #dcf8c6;
+            }
+        
+            /* Estilo para o campo de entrada de texto */
+            .chat-input {
+                border: none;
+                border-top: 1px solid #ccc;
+                padding: 10px;
+                font-size: 14px;
+                width: calc(100% - 20px);
+                resize: none;
+            }
+        
+            /* Estilo para o botão de enviar */
+            .chat-send-button {
+                background-color: #4CAF50;
+                color: #fff;
+                border: none;
+                border-radius: 0 0 10px 10px;
+                padding: 10px;
+                cursor: pointer;
+                font-size: 14px;
+                width: calc(100% - 20px);
+                transition: background-color 0.3s;
+            }
+        
+            /* Efeito de hover para o botão de enviar */
+            .chat-send-button:hover {
+                background-color: #45a049;
+            }
+        </style>
+        
 
         <div class="countdown-card">
             <h3>Tempo Restante para o Início da Inscrição</h3>
@@ -430,7 +553,7 @@ footer p {
     });
 
     // Define a data de término da contagem regressiva
-    var countDownDate = new Date("Mar 15, 2024 23:59:59").getTime();
+    var countDownDate = new Date("Mar 30, 2024 23:59:59").getTime();
 
     // Inicia a contagem regressiva
     var x = setInterval(function() {
@@ -570,6 +693,32 @@ footer p {
 });
 
 
+
+    </script>
+    <script>
+// Solicita permissão para receber notificações
+Notification.requestPermission().then((permission) => {
+  if (permission === 'granted') {
+    console.log('Permissão para receber notificações concedida.');
+
+    // Registra o serviço de mensagens do Firebase
+    const messaging = firebase.messaging();
+
+    // Configura um token de envio de notificações
+    messaging.getToken({ vapidKey: 'SUA_CHAVE_PUBLICA_VAPID' }).then((currentToken) => {
+      if (currentToken) {
+        console.log('Token de envio de notificações:', currentToken);
+        // Aqui você pode enviar o token de volta para o servidor para associá-lo ao usuário
+      } else {
+        console.log('Nenhum token disponível. Solicitando permissões de novo.');
+      }
+    }).catch((err) => {
+      console.log('Erro ao obter token de envio de notificações:', err);
+    });
+  } else {
+    console.log('Permissão para receber notificações negada.');
+  }
+});
 
     </script>
 
