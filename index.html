@@ -342,6 +342,7 @@ footer p {
                 <button type="submit" class="btn btn-primary btn-lg btn-block">Inscrever-se <i class="fas fa-check"></i></button>
             </form>
         </div>
+        
         <button id="toggleChatButton">Conversa Conosco <i class="fas fa-chevron-down"></i></button>
 
         <div class="chat-container" id="chatContainer">
@@ -584,7 +585,8 @@ footer p {
 });
 
     </script>
-    $(document).ready(function() {
+    <script>
+  $(document).ready(function() {
     // Inicializa o Realtime Database
     var database = firebase.database();
 
@@ -692,9 +694,6 @@ footer p {
         $('#chatBody').append(messageHtml);
     });
 });
-
-
-
     </script>
     <script>
 // Solicita permissão para receber notificações
