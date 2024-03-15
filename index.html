@@ -584,7 +584,6 @@ footer p {
 });
 
     </script>
-    <script>
     $(document).ready(function() {
     // Inicializa o Realtime Database
     var database = firebase.database();
@@ -642,6 +641,8 @@ footer p {
         database.ref('chatMessages/' + messageId + '/likes').transaction(function(likes) {
             return (likes || 0) + 1;
         });
+        // Desabilita o botão de like após ser clicado
+        $('#likeButton_' + messageId).prop('disabled', true);
     }
 
     // Função para adicionar um dislike a uma mensagem
@@ -649,6 +650,8 @@ footer p {
         database.ref('chatMessages/' + messageId + '/dislikes').transaction(function(dislikes) {
             return (dislikes || 0) + 1;
         });
+        // Desabilita o botão de dislike após ser clicado
+        $('#dislikeButton_' + messageId).prop('disabled', true);
     }
 
     // Evento de clique para botões de like
@@ -680,9 +683,9 @@ footer p {
         var messageHtml = '<div class="message ' + senderClass + '">';
         messageHtml += '<strong>' + data.sender + ':</strong> ' + data.message + '<br>';
         messageHtml += '<div>';
-        messageHtml += '<button class="like-button" data-message-id="' + messageId + '">👍</button>';
+        messageHtml += '<button id="likeButton_' + messageId + '" class="like-button" data-message-id="' + messageId + '">👍</button>';
         messageHtml += '<span class="likes-count" id="likesCount_' + messageId + '">' + data.likes + '</span>';
-        messageHtml += '<button class="dislike-button" data-message-id="' + messageId + '">👎</button>';
+        messageHtml += '<button id="dislikeButton_' + messageId + '" class="dislike-button" data-message-id="' + messageId + '">👎</button>';
         messageHtml += '<span class="dislikes-count" id="dislikesCount_' + messageId + '">' + data.dislikes + '</span>';
         messageHtml += '</div>';
         messageHtml += '</div>';
